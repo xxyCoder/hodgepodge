@@ -1,0 +1,16 @@
+.user-loginOrRegis__background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    background: url("@/assets/sky.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+    form {
+        display: inline-block;
+        margin-top: 20px;
+    }
+}

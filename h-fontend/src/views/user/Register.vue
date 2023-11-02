@@ -1,31 +1,35 @@
 <template>
-    <form @submit.prevent="submit">
-        <v-text-field variant="outlined" clearable placeholder="请输入用户名" v-model="name.value.value" :counter="10"
-            :error-messages="name.errorMessage.value" label="Name"></v-text-field>
+    <div class="user-loginOrRegis__background">
+        <h2>注册</h2>
+        <form @submit.prevent="submit">
+            <v-text-field variant="outlined" clearable placeholder="请输入用户名" v-model="name.value.value" :counter="10"
+                :error-messages="name.errorMessage.value" label="Name"></v-text-field>
 
-        <v-text-field type="password" variant="outlined" clearable placeholder="请输入密码" v-model="password.value.value"
-            :counter="10" :error-messages="password.errorMessage.value" label="Password"></v-text-field>
+            <v-text-field type="password" variant="outlined" clearable placeholder="请输入密码" v-model="password.value.value"
+                :counter="10" :error-messages="password.errorMessage.value" label="Password"></v-text-field>
 
-        <v-text-field type="password" variant="outlined" clearable placeholder="请确认密码" v-model="confirmPassword.value.value"
-            :counter="10" :error-messages="confirmPassword.errorMessage.value" label="Confirm Password"></v-text-field>
+            <v-text-field type="password" variant="outlined" clearable placeholder="请确认密码"
+                v-model="confirmPassword.value.value" :counter="10" :error-messages="confirmPassword.errorMessage.value"
+                label="Confirm Password"></v-text-field>
 
-        <v-text-field variant="outlined" clearable placeholder="请输入电话号码" v-model="phone.value.value" :counter="7"
-            :error-messages="phone.errorMessage.value" label="Phone Number"></v-text-field>
+            <v-text-field variant="outlined" clearable placeholder="请输入电话号码" v-model="phone.value.value" :counter="7"
+                :error-messages="phone.errorMessage.value" label="Phone Number"></v-text-field>
 
-        <v-text-field variant="outlined" clearable placeholder="请输入邮箱" v-model="email.value.value"
-            :error-messages="email.errorMessage.value" label="E-mail"></v-text-field>
+            <v-text-field variant="outlined" clearable placeholder="请输入邮箱" v-model="email.value.value"
+                :error-messages="email.errorMessage.value" label="E-mail"></v-text-field>
 
-        <v-checkbox v-model="checkbox.value.value" :error-messages="checkbox.errorMessage.value" value="1"
-            label="同意用户协议及隐式政策" type="checkbox"></v-checkbox>
+            <v-checkbox v-model="checkbox.value.value" :error-messages="checkbox.errorMessage.value" value="1"
+                label="同意用户协议及隐式政策" type="checkbox"></v-checkbox>
 
-        <v-btn class="me-4" type="submit">
-            register
-        </v-btn>
+            <v-btn class="me-4" type="submit">
+                register
+            </v-btn>
 
-        <v-btn @click="handleReset">
-            clear
-        </v-btn>
-    </form>
+            <v-btn @click="handleReset">
+                clear
+            </v-btn>
+        </form>
+    </div>
 </template>
 <script setup lang="ts">
 import { useField, useForm } from 'vee-validate'
@@ -76,3 +80,7 @@ const submit = handleSubmit(values => {
     alert(JSON.stringify(values, null, 2))
 })
 </script>
+
+<style scoped lang="scss">
+@import "../../styles/user/common.scss";
+</style>

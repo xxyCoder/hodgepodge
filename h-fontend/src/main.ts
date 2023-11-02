@@ -9,7 +9,6 @@ const vuetify = createVuetify({
     components,
     directives,
 })
-import './style.css'
 import App from './App.vue'
 
 createApp(App)
