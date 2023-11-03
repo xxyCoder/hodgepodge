@@ -17,3 +17,17 @@ img {
 
 # css的@import不能使用别名@
 - 别名@无法识别，可以使用相对路径或绝对路径
+
+# 当页面缩小到一定程度的时候，右边布局会掉下来怎么办？
+- 给CSS添加text-wrap:nowrap
+
+# 页面如何做响应式设计呢？
+1. 使用媒体查询+相对单位
+2. 图像和媒体可以使用max-width:100%
+3. 使用百分比
+
+# 设置了position:fixed还有必要设置z-index吗？
+- 没必要了，position:fixed默认覆盖其他元素，除非有多个position:fixed才需要
+
+# textarea为什么会与下面有一定空隙呢？
+- 是textarea元素的默认vertical-align属性值为baseline。当textarea和其他元素一起显示在同一行上时，textarea可能会对齐到基线，导致下面的元素在垂直方向上留有一定的空隙

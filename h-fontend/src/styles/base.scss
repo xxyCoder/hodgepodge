@@ -1,0 +1,31 @@
+/* 默认字体大小 */
+body {
+    font-size: 16px;
+}
+
+/* 小于等于576px的屏幕 */
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* 577px至768px之间的屏幕 */
+@media (min-width: 577px) and (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+/* 769px至992px之间的屏幕 */
+@media (min-width: 769px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+#app {
+    user-select: none;
+    margin: 0;
+    padding: 0
+}
