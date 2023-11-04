@@ -89,7 +89,7 @@ import { ref, onMounted, onUnmounted, reactive } from 'vue';
 const message = ref(1);
 const showList = ref(false);
 const isDragging = ref(false);
-const isClose = ref(false);
+const isClose = ref(true);
 const dragStartX = ref(0);
 const dragStartY = ref(0);
 const position = reactive({ x: 50, y: 50 });
@@ -176,6 +176,7 @@ a {
 
 .chat {
     margin: 0 .625rem;
+    z-index: 99999;
 }
 
 .message-box {

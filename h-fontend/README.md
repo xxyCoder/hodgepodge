@@ -31,3 +31,10 @@ img {
 
 # textarea为什么会与下面有一定空隙呢？
 - 是textarea元素的默认vertical-align属性值为baseline。当textarea和其他元素一起显示在同一行上时，textarea可能会对齐到基线，导致下面的元素在垂直方向上留有一定的空隙
+
+# 起别名
+- vite.config.js配置用于Rollup，构建模块的时候查找路径
+- tsconfig.json是给tsc用的，用于ts构建模块查询路径
+
+# 关于v-show的问题
+- 如果使用v-show作为条件判断，且条件判断方式是判断是否为空，不为空展示数据的部分仍然要带上?判断是否有内容，这是因为即使内容为空，也会执行渲染逻辑（只是后面设置display:none），导致没有数据出错
