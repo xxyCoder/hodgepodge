@@ -176,7 +176,6 @@ a {
 
 .chat {
     margin: 0 .625rem;
-    z-index: 99999;
 }
 
 .message-box {
@@ -238,8 +237,8 @@ a {
 }
 
 .chat-box {
+    z-index: 2;
     border: 1px solid #ccc;
-    // overflow: hidden;
     position: absolute;
     display: flex;
     width: 37.5rem;

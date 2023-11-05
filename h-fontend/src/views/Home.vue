@@ -1,5 +1,4 @@
 <template>
-    <Nav></Nav>
     <div class="main">
         <History :type="TEXT" :histories="articleHistories" title="文章浏览记录"></History>
         <History :type="VIDEO" title="视频浏览记录"></History>
@@ -14,7 +13,6 @@
 
 <script lang="ts" setup>
 import { onBeforeMount, ref } from 'vue';
-import Nav from '@/components/Nav.vue';
 import History from '@/components/History.vue';
 import Recommend from '@/components/Recommend.vue';
 import type { IHistory, IRecommend } from '@/types/index.ts';
