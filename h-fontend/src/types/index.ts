@@ -21,4 +21,5 @@ export interface IArticle {
     comments: number;
     collection: number;
     img?: string;
+    content?: string;
 }
