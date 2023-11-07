@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div ref="cardRef" class="container">
         <h5 class="title">{{ article.title }}</h5>
         <div class="content">
             <p>{{ article.summary }}</p>
@@ -8,7 +8,7 @@
         <div class="main" :class="unfold ? '' : 'three-line'" v-if="article.content">
             {{ article.content }}
         </div>
-        <div ref="footer" class="footer center">
+        <div ref="footer" :class="fixedBottom ? 'fixedBottom' : ''" class="footer center">
             <div class="center">
                 <router-link :to="'/user/' + article.userId">{{ article.author }}</router-link>
                 &nbsp;&nbsp;|
@@ -26,7 +26,7 @@
                 <v-btn v-show="collection" @click="handlerClickToCol" rounded="0" variant="text" prepend-icon="mdi-star"
                     color="blue-lighten-2">{{ article.thumb }}</v-btn>
             </div>
-            <div class="more-btn" @click="handlerClick">{{ unfold ? "收起全文" : "阅读全文" }}
+            <div v-if="article.content" class="more-btn" @click="handlerClick">{{ unfold ? "收起全文" : "阅读全文" }}
                 <v-icon v-show="!unfold" icon="mdi-chevron-down"></v-icon>
                 <v-icon v-show="unfold" icon="mdi-chevron-up"></v-icon>
             </div>
@@ -39,8 +39,7 @@
 
 <script lang="ts" setup>
 import type { IArticle } from "@/types/index.ts";
-import { ref } from "vue";
-import { PropType } from "vue";
+import { ref, onUpdated, computed, PropType } from "vue";
 
 defineProps({
     article: {
@@ -53,7 +52,34 @@ defineProps({
 const support = ref(false);
 const collection = ref(false);
 const unfold = ref(false);
-const footer = ref<HTMLDivElement>();
+const reachFooter = ref(false);
+const intoView = ref(false);
+const fixedBottom = computed(() => {
+    return unfold.value && intoView.value && !reachFooter.value;
+});
+const cardRef = ref<HTMLDivElement>();
+const height = document.documentElement.clientHeight;
+
+onUpdated(() => {
+    if (unfold.value) {
+        const bottom = cardRef.value!.getBoundingClientRect().bottom, top = cardRef.value!.getBoundingClientRect().top;
+        // 判断内容卡片是否进入可视区域
+        if (top + 100 <= height) {
+            intoView.value = true;
+        } else {
+            intoView.value = false;
+        }
+
+        // 判断底部是否进入可视区域
+        if (!reachFooter.value) {
+            if (height >= bottom) {
+                reachFooter.value = true;
+            }
+        } else if (height < bottom) {
+            reachFooter.value = false;
+        }
+    }
+})
 
 const handlerClickToSup = () => {
     support.value = !support.value;
@@ -63,6 +89,8 @@ const handlerClickToCol = () => {
 };
 const handlerClick = () => {
     unfold.value = !unfold.value;
+    reachFooter.value = false;
+    intoView.value = !intoView.value;
 };
 
 </script>
@@ -70,10 +98,9 @@ const handlerClick = () => {
 <style lang="scss" scoped>
 .container {
     cursor: pointer;
-    margin: .8125rem 0;
     box-sizing: border-box;
     padding: .75rem 1.25rem 0;
-    border-bottom: 1px solid #e4e6eb
+    border-bottom: 1px solid #e4e6eb;
 }
 
 .title {
@@ -114,6 +141,7 @@ const handlerClick = () => {
 .footer {
     font-size: .875rem;
     justify-content: space-between;
+    text-wrap: nowrap;
 }
 
 .tag {
@@ -126,7 +154,6 @@ const handlerClick = () => {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    min-height: 18px;
     line-height: 18px;
     max-width: 65px;
 }
@@ -143,5 +170,7 @@ const handlerClick = () => {
     bottom: 0px;
     position: fixed;
     z-index: 1;
+    background-color: #fff;
+    width: calc(80% - 1.25rem);
 }
 </style>

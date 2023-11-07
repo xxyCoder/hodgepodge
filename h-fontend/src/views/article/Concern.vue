@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash';
 import ArticleCard from '@/components/ArticleCard.vue';
 import type { IArticle } from "@/types/index.ts";
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const articleRef = ref<HTMLDivElement>();
 const scrollTop = ref(0);
@@ -84,14 +85,14 @@ const articles: IArticle[] = [
         collection: 3
     }
 ];
-const fn = () => {
+const fn = _.throttle(() => {
     scrollTop.value = articleRef.value!.scrollTop;
-};
+}, 400);
 
 onMounted(() => {
     articleRef.value!.addEventListener("scroll", fn, true);
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
     articleRef.value!.removeEventListener("scroll", fn, true);
 })
 </script>
