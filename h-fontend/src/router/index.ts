@@ -27,6 +27,20 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("@/views/article/Recent.vue")
             }
         ]
+    },
+    {
+        path: "/video",
+        component: () => import("@/views/video/Index.vue"),
+        children: [
+            {
+                path: "concern",
+                component: () => import("@/views/video/Concern.vue")
+            },
+            {
+                path: "",
+                component: () => import("@/views/video/Recent.vue")
+            }
+        ]
     }
 ]
 

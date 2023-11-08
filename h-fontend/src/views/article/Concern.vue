@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import _ from 'lodash';
+import { throttle } from 'lodash';
 import ArticleCard from '@/components/ArticleCard.vue';
 import type { IArticle } from "@/types/index.ts";
 import { onMounted, onBeforeUnmount, ref } from 'vue'
@@ -85,7 +85,7 @@ const articles: IArticle[] = [
         collection: 3
     }
 ];
-const fn = _.throttle(() => {
+const fn = throttle(() => {
     scrollTop.value = articleRef.value!.scrollTop;
 }, 400);
 

@@ -23,3 +23,18 @@ export interface IArticle {
     img?: string;
     content?: string;
 }
+
+export interface IVideo {
+    id: string;
+    title: string;
+    author: string;
+    userId: string;
+    thumb: number;
+    comments: number;
+    collection: number;
+    imgWebp: string;
+    imgAvif: string;
+    img: string;
+    src: string;
+    date: string;
+}

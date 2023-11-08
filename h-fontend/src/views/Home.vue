@@ -67,7 +67,7 @@ onBeforeMount(async () => {
     height: calc(100vh - 50px);
     overflow-y: auto;
     overflow-x: hidden;
-    min-height: 21.25rem ;
+    min-height: 21.25rem;
 }
 
 aside {

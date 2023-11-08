@@ -1,6 +1,7 @@
 <template>
     <nav>
         <div class="nav-left__search">
+            <v-btn @click="handleClick" class="home-btn" icon="$vuetify" variant="plain"></v-btn>
             <div class="nav__search">
                 <router-link to="/article">文章</router-link>
                 <input placeholder="请输入文章的关键字" type="search" />
@@ -85,6 +86,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 const message = ref(1);
 const showList = ref(false);
@@ -93,6 +95,7 @@ const isClose = ref(true);
 const dragStartX = ref(0);
 const dragStartY = ref(0);
 const position = reactive({ x: 50, y: 50 });
+const router = useRouter();
 
 const listenerShow = () => {
     showList.value = false;
@@ -130,6 +133,9 @@ const handleMouseMove = (e: MouseEvent) => {
         dragStartY.value = e.clientY;
     }
 }
+const handleClick = () => {
+    router.push({ path: "/" });
+}
 
 const handleClose = () => {
     isClose.value = !isClose.value;
@@ -149,6 +155,10 @@ nav {
     display: flex;
     align-items: center;
     text-wrap: nowrap;
+}
+
+.home-btn {
+    margin-right: .625rem;
 }
 
 .nav__search {
@@ -320,6 +330,7 @@ a {
 .content-input {
     height: 5rem;
     border-top: 1px solid #ccc;
+
     textarea {
         resize: none;
         font-size: .75rem;
@@ -328,11 +339,12 @@ a {
         height: 80%;
         vertical-align: top;
     }
+
     button {
         font-size: .625rem;
         display: block;
         margin-right: .3125rem;
         float: right;
-    }   
+    }
 }
 </style>

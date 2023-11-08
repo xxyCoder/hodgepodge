@@ -29,6 +29,8 @@ defineProps({
 <style lang="scss" scoped>
 .recommend {
     margin-bottom: 5px;
+    box-sizing: border-box;
+    padding: .625rem;
     ul,
     div {
         font-size: 14px;
@@ -44,7 +46,11 @@ defineProps({
 
     a:hover {
         color: #000;
-        font-size: 16px;
+    }
+}
+.recommend-list {
+    li {
+        margin: .3125rem 0;
     }
 }
 </style>
