@@ -149,6 +149,11 @@ nav {
     background-color: aquamarine;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    height: 50px;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 
 .nav-left__search {

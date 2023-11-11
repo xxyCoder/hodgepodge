@@ -1,6 +1,19 @@
 <template>
     <div class="video-card">
-        <div class="video-card__beCover"></div>
+        <div class="video-card__cover">
+            <div class="watch-later">
+                <v-icon icon="mdi-clock"></v-icon>
+                <div>稍后在看</div>
+            </div>
+            <picture>
+                <source :srcset="video.imgAvif" type="img/avif" />
+                <source :srcset="video.imgWebp" type="img/webp" />
+                <img src="@/assets/qiuzhao.webp" :alt="video.title" />
+            </picture>
+            <div class="player">
+                <!-- <video src=""></video> -->
+            </div>
+        </div>
         <div class="video-card__info">
             <h5>{{ video.title }}</h5>
             <router-link class="video-card__user" :to="'/user/' + video.userId">
@@ -20,16 +33,6 @@
                 <span>&nbsp;·&nbsp;{{ video.date }}</span>
             </router-link>
         </div>
-        <div class="video-card__cover">
-            <div class="watch-later">
-                <v-icon icon="mdi-clock"></v-icon>
-            </div>
-            <picture>
-                <source :srcset="video.imgAvif" type="img/avif" />
-                <source :srcset="video.imgWebp" type="img/webp" />
-                <img :src="video.img" :alt="video.title" />
-            </picture>
-        </div>
     </div>
 </template>
 
@@ -48,7 +51,8 @@ defineProps({
 <style lang="scss">
 .video-card {
     margin-top: 1.25rem;
-    position: relative;
+    margin-right: .625rem;
+    width: calc((100% - 10%) / 4);
 }
 
 .video-card__user {
@@ -56,6 +60,48 @@ defineProps({
     align-items: center;
     color: #9499A0;
     font-size: .8125rem;
+}
+
+.video-card__cover {
+    position: relative;
+
+    picture: {
+        width: 100%;
+    }
+}
+
+.watch-later {
+    position: absolute;
+    top: .1875rem;
+    right: .1875rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    div {
+        position: absolute;
+        visibility: hidden;
+        left: -1.875rem;
+        font-size: .75rem;
+        background-color: rgba(0, 0, 0, .8);
+        padding: 4px 8px;
+        color: #fff;
+        border-radius: .25rem;
+        text-wrap: nowrap;
+    }
+}
+
+.watch-later:hover {
+    div {
+        visibility: visible;
+    }
+}
+
+.video-card__cover:hover .watch-later {
+    opacity: 1;
+}
+
+.video-card__info {
+    text-wrap: nowrap;
 }
 
 .video-card__user:hover {

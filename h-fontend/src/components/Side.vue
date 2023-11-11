@@ -86,7 +86,7 @@ onBeforeMount(async () => {
 </script>
 
 <style lang="scss" scoped>
-side {
+aside {
     width: 20%;
     display: flex;
     flex-direction: column;

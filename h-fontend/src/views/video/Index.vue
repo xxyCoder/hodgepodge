@@ -1,7 +1,7 @@
 <template>
     <div class="video">
         <Side parentPath="video" :type="VIDEO" />
-        <router-view></router-view>
+        <router-view style="flex:1"></router-view>
     </div>
 </template>
 
@@ -15,5 +15,7 @@ import { VIDEO } from '@/types/constant'
 <style scoped lang="scss">
 .video {
     display: flex;
+    position: relative;
+    transform: translateY(50px);
 }
 </style>
