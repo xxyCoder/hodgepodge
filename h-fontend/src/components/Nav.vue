@@ -153,6 +153,8 @@ nav {
     height: 50px;
     left: 0;
     right: 0;
+    overflow-x: auto;
+    top: 0;
     z-index: 1;
 }
 

@@ -13,8 +13,8 @@ import { TEXT } from '@/types/constant';
 <style scoped lang="scss">
 .article {
     display: flex;
-    position: relative;
-    transform: translateY(50px);
+    margin-top: 50px;
+    margin-left: 200px;
 }
 
 </style>

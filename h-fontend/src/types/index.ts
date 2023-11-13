@@ -30,7 +30,13 @@ export interface IVideo {
     author: string;
     userId: string;
     thumb: number;
+    introduction?: string;
     comments: number;
+    hotComment?: {
+        userId: string;
+        username: string;
+        comment: string;
+    };
     collection: number;
     imgWebp: string;
     imgAvif: string;

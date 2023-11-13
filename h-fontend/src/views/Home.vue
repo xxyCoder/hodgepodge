@@ -61,8 +61,7 @@ onBeforeMount(async () => {
 <style lang="scss" scoped>
 .main {
     display: grid;
-    position: relative;
-    transform: translateY(50px);
+    margin-top: 50px;
     column-gap: .9375rem;
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: 100%;

@@ -1,6 +1,6 @@
 <template>
     <aside>
-        <v-list class="menu" density="compact">
+        <v-list density="compact">
             <v-list-subheader>MENU</v-list-subheader>
             <v-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" :to="item.href"
                 :active="idx === i">
@@ -87,12 +87,12 @@ onBeforeMount(async () => {
 
 <style lang="scss" scoped>
 aside {
-    width: 20%;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 200px;
     display: flex;
     flex-direction: column;
-}
-
-.menu {
-    margin-right: .625rem;
 }
 </style>

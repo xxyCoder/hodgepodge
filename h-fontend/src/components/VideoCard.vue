@@ -52,7 +52,6 @@ defineProps({
 .video-card {
     margin-top: 1.25rem;
     margin-right: .625rem;
-    width: calc((100% - 10%) / 4);
 }
 
 .video-card__user {

@@ -68,6 +68,10 @@ let otherHistories = props.histories.slice(1);
 
     h4 {
         text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: #fff;
     }
 }
 
