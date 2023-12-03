@@ -2,11 +2,11 @@
     <div class="main">
         <History :type="TEXT" :histories="articleHistories" title="文章浏览记录"></History>
         <History :type="VIDEO" title="视频浏览记录"></History>
-        <History :type="IMAGE" title="商城浏览记录"></History>
+        <History :type="IMAGE" title="论坛浏览记录"></History>
         <aside>
             <Recommend :recommends="articleRecommends" title="文章今日推荐"></Recommend>
             <Recommend title="视频今日推荐"></Recommend>
-            <Recommend title="商品今日推荐"></Recommend>
+            <Recommend title="论坛今日推荐"></Recommend>
         </aside>
     </div>
 </template>

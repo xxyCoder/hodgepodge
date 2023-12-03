@@ -13,6 +13,10 @@
             <div class="player">
                 <!-- <video src=""></video> -->
             </div>
+            <div class="infos">
+                <span><v-icon icon="mdi-youtube"></v-icon>{{video.views}}</span>
+                <span><v-icon icon="mdi-chat-outline"></v-icon>{{video.comments}}</span>
+            </div>
         </div>
         <div class="video-card__info">
             <h5>{{ video.title }}</h5>
@@ -95,8 +99,26 @@ defineProps({
     }
 }
 
+.infos {
+    font-size: .75rem;
+    position: absolute;
+    bottom: .625rem;
+    left: .625rem;
+    color: #fff;
+    transition: opacity 0.5s ease-in-out;
+    span {
+        padding: 0 .3125rem;
+    }
+}
+
+
 .video-card__cover:hover .watch-later {
     opacity: 1;
+}
+
+.video-card__cover:hover .infos {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .video-card__info {

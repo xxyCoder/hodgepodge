@@ -16,6 +16,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -28,6 +30,8 @@ const videos: IVideo[] = [{
     date: "11-6",
     userId: "2",
     thumb: 666,
+    views: 1000,
+    forward: 2000,
     comments: 40,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
@@ -42,6 +46,8 @@ const videos: IVideo[] = [{
     date: "11-6",
     userId: "2",
     thumb: 666,
+    views: 1000,
+    forward: 2000,
     comments: 40,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
@@ -55,6 +61,23 @@ const videos: IVideo[] = [{
     author: "阿杜是阿宇的啊",
     date: "11-6",
     userId: "2",
+    views: 1000,
+    forward: 2000,
+    thumb: 666,
+    comments: 40,
+    collection: 10,
+    img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
+    imgWebp: "/src/assets/qiuzhao.webp",
+    imgAvif: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover.avif",
+    src: "https://www.bilibili.com/video/BV15Q4y1n7jh/?spm_id_from=333.1007.tianma.4-1-11.click"
+}, {
+    id: "1",
+    title: "我放弃了年薪40w的offer",
+    author: "阿杜是阿宇的啊",
+    date: "11-6",
+    userId: "2",
+    views: 1000,
+    forward: 2000,
     thumb: 666,
     comments: 40,
     collection: 10,
@@ -70,6 +93,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -83,6 +108,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -96,6 +123,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -109,6 +138,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -122,6 +153,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -135,19 +168,8 @@ const videos: IVideo[] = [{
     userId: "2",
     thumb: 666,
     comments: 40,
-    collection: 10,
-    img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
-    imgWebp: "/src/assets/qiuzhao.webp",
-    imgAvif: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover.avif",
-    src: "https://www.bilibili.com/video/BV15Q4y1n7jh/?spm_id_from=333.1007.tianma.4-1-11.click"
-}, {
-    id: "1",
-    title: "我放弃了年薪40w的offer",
-    author: "阿杜是阿宇的啊",
-    date: "11-6",
-    userId: "2",
-    thumb: 666,
-    comments: 40,
+    views: 1000,
+    forward: 2000,
     collection: 10,
     img: "https://i1.hdslb.com/bfs/archive/17ba0571cebe3cc22e5f296d94710c874335dd7f.jpg@672w_378h_1c_!web-home-common-cover",
     imgWebp: "/src/assets/qiuzhao.webp",
@@ -159,9 +181,8 @@ const videos: IVideo[] = [{
 <style lang="scss">
 .video-recent {
     display: grid;
-    flex-wrap: wrap;
     grid-template-columns: repeat(4, 1fr);
-    min-width: 110px;
+    min-width: 500px;
     height: calc(100vh - 50px);
     overflow-x: auto;
 }

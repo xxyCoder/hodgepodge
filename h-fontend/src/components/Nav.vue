@@ -11,7 +11,7 @@
                 <input placeholder="请输入视频的关键字" type="search" />
             </div>
             <div class="nav__search">
-                <router-link to="/shop">商城</router-link>
+                <router-link to="/forum">论坛</router-link>
                 <input placeholder="请输入商品的关键字" type="search" />
             </div>
         </div>
@@ -153,7 +153,7 @@ nav {
     height: 50px;
     left: 0;
     right: 0;
-    overflow-x: auto;
+    overflow: auto hidden;
     top: 0;
     z-index: 1;
 }

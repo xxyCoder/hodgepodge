@@ -29,15 +29,17 @@ export interface IVideo {
     title: string;
     author: string;
     userId: string;
-    thumb: number;
+    thumb: number;  // 点赞量
     introduction?: string;
-    comments: number;
+    comments: number;   // 评论量
+    views?: number; // 观看量
     hotComment?: {
         userId: string;
         username: string;
         comment: string;
     };
-    collection: number;
+    collection: number; // 收藏量
+    forward: number;    // 转发量
     imgWebp: string;
     imgAvif: string;
     img: string;
