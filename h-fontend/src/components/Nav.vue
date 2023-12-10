@@ -11,7 +11,7 @@
                 <input placeholder="请输入视频的关键字" type="search" />
             </div>
             <div class="nav__search">
-                <router-link to="/forum">论坛</router-link>
+                <router-link to="/discuss">讨论</router-link>
                 <input placeholder="请输入商品的关键字" type="search" />
             </div>
         </div>

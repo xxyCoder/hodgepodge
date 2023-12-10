@@ -16,7 +16,8 @@ const articles: IArticle[] = [
     {
         id: "1",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        data: "0",
+        username: "xxyCoder",
         userId: "1",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",
@@ -28,7 +29,8 @@ const articles: IArticle[] = [
     {
         id: "2",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        data: "0",
+        username: "xxyCoder",
         userId: "2",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",
@@ -40,7 +42,8 @@ const articles: IArticle[] = [
     {
         id: "3",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        username: "xxyCoder",
+        data: "0",
         userId: "3",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",
@@ -52,7 +55,8 @@ const articles: IArticle[] = [
     {
         id: "4",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        data: "0",
+        username: "xxyCoder",
         userId: "4",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",
@@ -64,7 +68,8 @@ const articles: IArticle[] = [
     {
         id: "5",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        username: "xxyCoder",
+        data: "0",
         userId: "4",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",
@@ -76,7 +81,8 @@ const articles: IArticle[] = [
     {
         id: "4",
         title: "前端走向全栈",
-        author: "xxyCoder",
+        username: "xxyCoder",
+        data: "0",
         userId: "4",
         tags: ["前端", "后端", "全栈"],
         summary: "xxxxxx前端，后端,.....，全栈",

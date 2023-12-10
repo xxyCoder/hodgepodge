@@ -4,17 +4,19 @@ export interface IHistory {
     summaryOrSrc: string;
 }
 
-export interface IRecommend {
+interface IBase {
     id: string;
-    title: string;
+    userId: string;
+    username: string;
+    data: string;
+    title: string
+}
+
+export interface IRecommend extends IBase{
     addr: string;
 }
 
-export interface IArticle {
-    id: string;
-    title: string;
-    author: string;
-    userId: string;
+export interface IArticle extends IBase{
     tags: Array<string>;
     summary: string;
     thumb: number;
@@ -24,11 +26,7 @@ export interface IArticle {
     content?: string;
 }
 
-export interface IVideo {
-    id: string;
-    title: string;
-    author: string;
-    userId: string;
+export interface IVideo extends IBase{
     thumb: number;  // 点赞量
     introduction?: string;
     comments: number;   // 评论量
@@ -44,5 +42,9 @@ export interface IVideo {
     imgAvif: string;
     img: string;
     src: string;
-    date: string;
+}
+
+export interface IRemark extends IBase {
+    partialContent: string;
+    imgs?: string[]
 }

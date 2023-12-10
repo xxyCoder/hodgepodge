@@ -2,7 +2,7 @@
     <div class="main">
         <History :type="TEXT" :histories="articleHistories" title="文章浏览记录"></History>
         <History :type="VIDEO" title="视频浏览记录"></History>
-        <History :type="IMAGE" title="论坛浏览记录"></History>
+        <History :type="FORUM" title="论坛浏览记录"></History>
         <aside>
             <Recommend :recommends="articleRecommends" title="文章今日推荐"></Recommend>
             <Recommend title="视频今日推荐"></Recommend>
@@ -16,7 +16,7 @@ import { onBeforeMount, ref } from 'vue';
 import History from '@/components/History.vue';
 import Recommend from '@/components/Recommend.vue';
 import type { IHistory, IRecommend } from '@/types/index.ts';
-import { TEXT, VIDEO, IMAGE } from '@/types/constant.ts'
+import { TEXT, VIDEO, FORUM } from '@/types/constant.ts'
 
 const articleHistories = ref<IHistory[]>([]);
 // const videoHistories = ref<IHistory[]>([]);

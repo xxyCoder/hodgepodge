@@ -2,7 +2,7 @@
     <div class="video-big__card">
         <img class="video-avatar" src="@/assets/hkd.webp" alt="">
         <div class="video-card_right">
-            <h5 class="ellipsis">{{ video.author }}</h5>
+            <h5 class="ellipsis">{{ video.username }}</h5>
             <span class="fs-small">{{ video.date }} · 发布了视频</span>
             <div class="video-card__body">
                 <div class="video-card__content">

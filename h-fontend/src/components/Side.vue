@@ -18,7 +18,7 @@
 import { ref, onBeforeMount } from 'vue';
 import RecommendVue from './Recommend.vue';
 import { IRecommend } from "@/types/index.ts"
-import { TEXT, VIDEO, IMAGE } from "@/types/constant.ts"
+import { TEXT, VIDEO, FORUM } from "@/types/constant.ts"
 
 const props = defineProps({
     parentPath: {
@@ -27,7 +27,7 @@ const props = defineProps({
     },
     type: {
         validator(value) {
-            return value === TEXT || value === VIDEO || value === IMAGE;
+            return value === TEXT || value === VIDEO || value === FORUM;
         }
     }
 })
@@ -78,7 +78,7 @@ onBeforeMount(async () => {
             break;
         case VIDEO:
             break;
-        case IMAGE:
+        case FORUM:
             break;
         default: break;
     }

@@ -1,0 +1,20 @@
+<template>
+    <div class="discuss">
+        <Side parentPath="discuss" :type="TEXT" />
+        <router-view></router-view>
+    </div>
+</template>
+
+<script setup lang="ts">
+import Side from '@/components/Side.vue';
+import { TEXT } from '@/types/constant';
+</script>
+
+<style scoped lang="scss">
+.discuss {
+    display: flex;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+</style>

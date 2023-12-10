@@ -6,10 +6,7 @@
                 <div class="history-list__first interval">
                     <div class="history-card">
                         <div class="card-main">
-                            <template v-if="type === IMAGE">
-                                <img :src="firstHistory?.summaryOrSrc" alt="资源加载中...">
-                            </template>
-                            <template v-else-if="type === VIDEO">
+                            <template v-if="type === VIDEO">
                                 <video :src="firstHistory?.summaryOrSrc"></video>
                             </template>
                             <template v-else>
@@ -41,7 +38,7 @@
 
 <script lang="ts" setup>
 import type { IHistory } from "@/types/index";
-import { VIDEO, IMAGE } from '@/types/constant.ts'
+import { VIDEO } from '@/types/constant.ts'
 import { PropType } from "vue";
 
 const props = defineProps({

@@ -10,7 +10,7 @@
         </div>
         <div ref="footer" :class="fixedBottom ? 'fixedBottom' : ''" class="footer center">
             <div class="center">
-                <router-link :to="'/user/' + article.userId">{{ article.author }}</router-link>
+                <router-link :to="'/user/' + article.userId">{{ article.username }}</router-link>
                 &nbsp;&nbsp;|
                 <v-btn v-show="!support" @click="handlerClickToSup" rounded="0" variant="text"
                     prepend-icon="mdi-thumb-up-outline" color="blue-lighten-2">{{ article.thumb }}</v-btn>

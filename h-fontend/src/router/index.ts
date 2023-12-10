@@ -41,6 +41,20 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("@/views/video/Recent.vue")
             }
         ]
+    },
+    {
+        path: '/discuss',
+        component: () => import("@/views/discuss/Index.vue"),
+        children: [
+            {
+                path: "concern",
+                component: () => import("@/views/discuss/Concern.vue")
+            },
+            {
+                path: "",
+                component: () => import("@/views/discuss/Recent.vue")
+            }
+        ]
     }
 ]
 
