@@ -17,13 +17,13 @@ export interface IRecommend extends IBase{
 }
 
 export interface IArticle extends IBase{
-    tags: Array<string>;
+    tags?: Array<string>;
     summary: string;
     thumb: number;
     comments: number;
+    views: number;
     collection: number;
     img?: string;
-    content?: string;
 }
 
 export interface IVideo extends IBase{
