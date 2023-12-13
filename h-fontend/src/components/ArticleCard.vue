@@ -3,7 +3,7 @@
         <h5 class="title">{{ article.title }}</h5>
         <div class="content">
             <p>{{ article.summary }}</p>
-            <img v-if="article.img" :src="article.img" alt="">
+            <img v-if="article.coverImg" :src="article.coverImg" alt="">
         </div>
         <div class="main" :class="unfold ? '' : 'three-line'" v-if="article.content">
             {{ article.content }}
@@ -20,7 +20,7 @@
                 </v-btn>
                 &nbsp;&nbsp;
                 <v-btn rounded="0" variant="text" prepend-icon="mdi-comment-processing-outline" color="blue-lighten-2">{{
-                    article.comments }}</v-btn>
+                    article.commentCnt }}</v-btn>
                 <v-btn v-show="!collection" @click="handlerClickToCol" rounded="0" variant="text"
                     prepend-icon="mdi-star-outline" color="blue-lighten-2">{{ article.thumb }}</v-btn>
                 <v-btn v-show="collection" @click="handlerClickToCol" rounded="0" variant="text" prepend-icon="mdi-star"

@@ -4,8 +4,9 @@ export interface IArticle extends ICommon {
     tags?: Array<string>;
     summary: string;
     thumb: number;
-    comments: number;
+    commentCnt: number;
     views: number;
     collection: number;
-    img?: string;
+    coverImg?: string;
+    articlePath: string;
 }

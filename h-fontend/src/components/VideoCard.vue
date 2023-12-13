@@ -15,7 +15,7 @@
             </div>
             <div class="infos">
                 <span><v-icon icon="mdi-youtube"></v-icon>{{video.views}}</span>
-                <span><v-icon icon="mdi-chat-outline"></v-icon>{{video.comments}}</span>
+                <span><v-icon icon="mdi-chat-outline"></v-icon>{{video.commentCnt}}</span>
             </div>
         </div>
         <div class="video-card__info">

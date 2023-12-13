@@ -1,35 +1,35 @@
 export interface IHistory {
     id: string;
     titleOrName: string;
-    summaryOrSrc: string;
 }
 
 interface IBase {
     id: string;
     userId: string;
     username: string;
-    data: string;
+    date: Date;
     title: string
 }
 
-export interface IRecommend extends IBase{
+export interface IRecommend extends IBase {
     addr: string;
 }
 
-export interface IArticle extends IBase{
+export interface IArticle extends IBase {
     tags?: Array<string>;
     summary: string;
     thumb: number;
-    comments: number;
+    commentCnt: number;
     views: number;
     collection: number;
-    img?: string;
+    coverImg?: string;
+    content?: string;
 }
 
-export interface IVideo extends IBase{
+export interface IVideo extends IBase {
     thumb: number;  // 点赞量
     introduction?: string;
-    comments: number;   // 评论量
+    commentCnt: number;   // 评论量
     views?: number; // 观看量
     hotComment?: {
         userId: string;

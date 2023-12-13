@@ -1,6 +1,6 @@
 export interface ICommon {
-    id: string;
-    userId: string;
+    id: number;
+    userId: number;
     username: string;
     data: string;
     title: string;
