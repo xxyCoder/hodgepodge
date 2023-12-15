@@ -7,7 +7,7 @@ export class Articles extends Basic {
     @Column("string")
     summary: string;
     @Column("simple-array")
-    tags?: string[];
+    tags: string[];
     @Column("int")
     thumb: number;
     @Column("int")

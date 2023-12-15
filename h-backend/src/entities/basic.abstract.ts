@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
 export abstract class Basic {
     @PrimaryGeneratedColumn()
@@ -9,6 +9,6 @@ export abstract class Basic {
     username: string;
     @Column("string")
     title: string;
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'date' })
     date: Date
 }
