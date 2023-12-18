@@ -8,5 +8,12 @@ export interface IArticle extends ICommon {
     views: number;
     collection: number;
     coverImg: string;
-    articlePath: string;
+}
+
+export interface saveArticleParams {
+    title?: string;
+    tags?: string[];
+    summary?: string;
+    coverImg?: string;
+    content?: string;
 }

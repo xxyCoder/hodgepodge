@@ -6,8 +6,6 @@ export abstract class Basic {
     @Column("number")
     userId: number;
     @Column("string")
-    username: string;
-    @Column("string")
     title: string;
     @CreateDateColumn({ name: 'date' })
     date: Date
