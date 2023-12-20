@@ -1,10 +1,9 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path"
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res } from "@nestjs/common";
 import { saveArticleParams } from "src/interfaces/article.interface";
 import { ArticlesService } from "src/services/articles.service";
 import { Response } from "express";
-import { pageConditions } from "src/interfaces/conditions.interface";
 
 @Controller("articles")
 export class ArticlesController {
@@ -28,7 +27,7 @@ export class ArticlesController {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "上传成功" });
             })
             .catch((err) => {
-                console.error(`上传失败：${err}`);
+                console.error(`文章上传失败：${err}`);
                 resp.status(HttpStatus.OK).send({ code: 1001, msg: "上传失败" });
             });
     }
@@ -46,7 +45,7 @@ export class ArticlesController {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "更新成功" });
             })
             .catch(err => {
-                console.error(`更新失败：${err}`)
+                console.error(`文章更新失败：${err}`)
                 resp.status(HttpStatus.OK).send({ code: 1002, msg: "更新失败" });
             })
     }
@@ -57,7 +56,7 @@ export class ArticlesController {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "删除成功" });
             })
             .catch((err) => {
-                console.error(`删除失败：${err}`);
+                console.error(`文章删除失败：${err}`);
                 resp.status(HttpStatus.OK).send({ code: 1003, msg: "删除失败" });
             });
     }
@@ -68,7 +67,7 @@ export class ArticlesController {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "查询成功", res });
             })
             .catch(err => {
-                console.error(`查询失败：${err}`);
+                console.error(`文章查询失败：${err}`);
                 resp.status(HttpStatus.OK).send({ code: 1004, msg: "查询失败" });
             })
     }
