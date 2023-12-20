@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Post, Query, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res } from "@nestjs/common";
 import { userLoginParams } from "src/interfaces/users.interface";
 import { UsersService } from "src/services/users.service";
 import { Response, response } from "express";
@@ -50,6 +50,18 @@ export class UsersController {
             .catch(err => {
                 console.error(`用户查询失败：${err}`);
                 resp.status(HttpStatus.OK).send({ code: 2005, msg: "查询失败" });
+            })
+    }
+    @Put()
+    update(@Query("id") id, @Body() body: { username?: string, password?: string }, @Res() resp: Response) {
+        const config: Record<string, string> = {};
+        this.usersService.modify(id, config)
+            .then(() => {
+                resp.status(HttpStatus.OK).send({ code: 0, msg: "修改成功" });
+            })
+            .catch(err => {
+                console.error(`${id}信息修改失败：${err}`);
+                resp.status(HttpStatus.OK).send({ code: 2006, msg: "修改失败" }); ''
             })
     }
 }
