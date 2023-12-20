@@ -10,3 +10,13 @@ export interface userLoginParams {
     account: string;
     password: string;
 }
+
+export interface userModParams {
+    username?: string;
+    password?: string;
+}
+
+export interface userOutParams {
+    account: string;
+    password: string;
+}

@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res } from "@nestjs/common";
-import { userLoginParams } from "src/interfaces/users.interface";
+import { userLoginParams, userModParams, userOutParams } from "src/interfaces/users.interface";
 import { UsersService } from "src/services/users.service";
 import { Response, response } from "express";
 
@@ -19,7 +19,7 @@ export class UsersController {
     }
     @Post("login")
     login(@Body() body: userLoginParams, @Res() resp: Response) {
-        this.usersService.find(body.account, body.password)
+        this.usersService.find({ account: body.account, password: body.password })
             .then(res => {
                 let msg = "登录成功", code = 0
                 res.length === 0 && (msg = "密码错误", code = 2002)
@@ -31,8 +31,8 @@ export class UsersController {
             })
     }
     @Delete()
-    logout(@Query("id") id: number, @Res() resp: Response) {
-        this.usersService.delete(id)
+    logout(@Query("id") id: number, @Body() body: userOutParams, @Res() resp: Response) {
+        this.usersService.delete(id, body)
             .then(() => {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "注销成功" });
             })
@@ -53,15 +53,18 @@ export class UsersController {
             })
     }
     @Put()
-    update(@Query("id") id, @Body() body: { username?: string, password?: string }, @Res() resp: Response) {
+    update(@Query("id") id, @Body() body: userModParams, @Res() resp: Response) {
         const config: Record<string, string> = {};
+        const { password, username } = body;
+        password && Object.assign(config, { password })
+        username && Object.assign(config, { username })
         this.usersService.modify(id, config)
             .then(() => {
                 resp.status(HttpStatus.OK).send({ code: 0, msg: "修改成功" });
             })
             .catch(err => {
                 console.error(`${id}信息修改失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2006, msg: "修改失败" }); ''
+                resp.status(HttpStatus.OK).send({ code: 2006, msg: "修改失败" });
             })
     }
 }

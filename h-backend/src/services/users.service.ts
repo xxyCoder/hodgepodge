@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "src/entities/users";
-import { IUsers } from "src/interfaces/users.interface";
+import { IUsers, userModParams, userOutParams } from "src/interfaces/users.interface";
 import { Repository } from "typeorm";
 
 @Injectable()
@@ -10,10 +10,10 @@ export class UsersService {
     create(user: IUsers) {
         return this.usersRepository.save(user);
     }
-    delete(id: number) {
-        return this.usersRepository.delete(id);
+    delete(id: number, args: userOutParams) {
+        return this.usersRepository.delete({ id, ...args });
     }
-    modify(id: number, args: Record<string, string>) {
+    modify(id: number, args: userModParams) {
         return this.usersRepository.update(id, args);
     }
     pageFind(page_num: number, page_size: number, username: string) {
@@ -24,7 +24,7 @@ export class UsersService {
             .take(page_num)
             .getMany()
     }
-    find(account: string, password: string) {
-        return this.usersRepository.find({ where: { account, password } });
+    find(args: userOutParams) {
+        return this.usersRepository.find({ where: args });
     }
 }
