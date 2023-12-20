@@ -1,9 +1,10 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path"
-import { Body, Controller, Get, HttpStatus, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { saveArticleParams } from "src/interfaces/article.interface";
 import { ArticlesService } from "src/services/articles.service";
 import { Response } from "express";
+import { pageConditions } from "src/interfaces/conditions.interface";
 
 @Controller("articles")
 export class ArticlesController {
@@ -31,8 +32,8 @@ export class ArticlesController {
                 resp.status(HttpStatus.OK).send({ code: 1001, msg: "上传失败" });
             });
     }
-    @Put(":id")
-    update(@Param("id") id: number, @Body() body: saveArticleParams, @Res() resp: Response) {
+    @Put()
+    update(@Query("id") id: number, @Body() body: saveArticleParams, @Res() resp: Response) {
         const config: Record<string, string | number | string[]> = {};
         body.content && Object.assign(config, { content: body.content });
         body.coverImg && Object.assign(config, { coverImg: body.coverImg });
@@ -47,6 +48,28 @@ export class ArticlesController {
             .catch(err => {
                 console.error(`更新失败：${err}`)
                 resp.status(HttpStatus.OK).send({ code: 1002, msg: "更新失败" });
+            })
+    }
+    @Delete()
+    remove(@Query("id") id: number, @Res() resp: Response) {
+        this.articlesService.delete(id)
+            .then(() => {
+                resp.status(HttpStatus.OK).send({ code: 0, msg: "删除成功" });
+            })
+            .catch((err) => {
+                console.error(`删除失败：${err}`);
+                resp.status(HttpStatus.OK).send({ code: 1003, msg: "删除失败" });
+            });
+    }
+    @Get()
+    find(@Query("page_num") page_num: number, @Query("page_size") page_size: number, @Body() body: { condition: number, args: number[] | string }, @Res() resp: Response) {
+        this.articlesService.pageFind(page_num, page_size, body.condition, body.args)
+            .then(res => {
+                resp.status(HttpStatus.OK).send({ code: 0, msg: "查询成功", res });
+            })
+            .catch(err => {
+                console.error(`查询失败：${err}`);
+                resp.status(HttpStatus.OK).send({ code: 1004, msg: "查询失败" });
             })
     }
 }

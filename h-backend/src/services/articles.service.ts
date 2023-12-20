@@ -38,5 +38,6 @@ export class ArticlesService {
         return query
             .skip((page_size - 1) * page_num)
             .take(page_num)
+            .getMany()
     }
 }
