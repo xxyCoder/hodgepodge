@@ -18,5 +18,5 @@ export interface userModParams {
 
 export interface userOutParams {
     account: string;
-    password: string;
+    password?: string;
 }

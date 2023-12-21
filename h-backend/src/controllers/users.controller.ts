@@ -7,15 +7,19 @@ import { Response, response } from "express";
 export class UsersController {
     constructor(private usersService: UsersService) { }
     @Post("registry")
-    registry(@Body() body: userLoginParams, @Res() resp: Response) {
-        this.usersService.create({ id: null, ...body })
-            .then(() => {
-                resp.status(HttpStatus.OK).send({ code: 0, msg: "注册成功" })
-            })
-            .catch(err => {
-                console.error(`${body.username}注册失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2001, msg: "注册失败" })
-            })
+    async registry(@Body() body: userLoginParams, @Res() resp: Response) {
+        try {
+            const res = await this.usersService.find({ account: body.account });
+            if (res.length > 0) {
+                resp.status(HttpStatus.OK).send({ code: 2007, msg: "用户存在" });
+                return;
+            }
+            await this.usersService.create({ id: null, ...body })
+            resp.status(HttpStatus.OK).send({ code: 0, msg: "注册成功" });
+        } catch(err) {
+            console.error(`${body.username}注册失败：${err}`);
+            resp.status(HttpStatus.OK).send({ code: 2001, msg: "注册失败" });
+        }
     }
     @Post("login")
     login(@Body() body: userLoginParams, @Res() resp: Response) {
