@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res } from "@nestjs/common";
+import jwt from "jsonwebtoken"
 import { userLoginParams, userModParams, userOutParams } from "src/interfaces/users.interface";
 import { UsersService } from "src/services/users.service";
-import { Response, response } from "express";
+import { Response } from "express";
+import { loginFail, logoutFail, modifyFail, passwordError, registryFail, searchFail, userExists } from "src/constant/users.constant";
 
 @Controller("users")
 export class UsersController {
@@ -11,27 +13,30 @@ export class UsersController {
         try {
             const res = await this.usersService.find({ account: body.account });
             if (res.length > 0) {
-                resp.status(HttpStatus.OK).send({ code: 2007, msg: "用户存在" });
+                resp.status(HttpStatus.OK).send(userExists);
                 return;
             }
             await this.usersService.create({ id: null, ...body })
             resp.status(HttpStatus.OK).send({ code: 0, msg: "注册成功" });
-        } catch(err) {
+        } catch (err) {
             console.error(`${body.username}注册失败：${err}`);
-            resp.status(HttpStatus.OK).send({ code: 2001, msg: "注册失败" });
+            resp.status(HttpStatus.OK).send(registryFail);
         }
     }
     @Post("login")
     login(@Body() body: userLoginParams, @Res() resp: Response) {
         this.usersService.find({ account: body.account, password: body.password })
             .then(res => {
-                let msg = "登录成功", code = 0
-                res.length === 0 && (msg = "密码错误", code = 2002)
-                resp.status(HttpStatus.OK).send({ code, msg })
+                if (res.length === 0) {
+                    resp.send(HttpStatus.OK).send(passwordError);
+                    return;
+                }
+                const token = jwt.sign({ id: res[0].id, username: res[0].username }, "hodgepodge", { expiresIn: '3d' });
+                resp.status(HttpStatus.OK).send({ code: 0, msg: "登录成功", token })
             })
             .catch(err => {
                 console.error(`${body.username}登录失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2003, msg: "登录失败" });
+                resp.status(HttpStatus.OK).send(loginFail);
             })
     }
     @Delete()
@@ -42,7 +47,7 @@ export class UsersController {
             })
             .catch(err => {
                 console.error(`用户注销失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2004, msg: "注销失败" });
+                resp.status(HttpStatus.OK).send(logoutFail);
             })
     }
     @Get()
@@ -53,7 +58,7 @@ export class UsersController {
             })
             .catch(err => {
                 console.error(`用户查询失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2005, msg: "查询失败" });
+                resp.status(HttpStatus.OK).send(searchFail);
             })
     }
     @Put()
@@ -68,7 +73,7 @@ export class UsersController {
             })
             .catch(err => {
                 console.error(`${id}信息修改失败：${err}`);
-                resp.status(HttpStatus.OK).send({ code: 2006, msg: "修改失败" });
+                resp.status(HttpStatus.OK).send(modifyFail);
             })
     }
 }
