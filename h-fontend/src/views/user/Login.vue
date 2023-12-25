@@ -4,42 +4,49 @@
         <form @submit.prevent="submit">
             <v-text-field variant="outlined" clearable placeholder="请输入用户名" v-model="name.value.value" :counter="10"
                 :error-messages="name.errorMessage.value" label="Name"></v-text-field>
-
             <v-text-field type="password" variant="outlined" clearable placeholder="请输入密码" v-model="password.value.value"
                 :counter="10" :error-messages="password.errorMessage.value" label="Password"></v-text-field>
-
-            <v-btn class="me-4" type="submit">
-                login
-            </v-btn>
-
-            <v-btn @click="handleReset">
-                clear
-            </v-btn>
+            <v-btn class="me-4" type="submit">login</v-btn>
+            <v-btn @click="handleReset">clear</v-btn>
         </form>
     </div>
 </template>
 <script setup lang="ts">
+import { buiredPoint } from '@/api/report';
+import { userLogin } from '@/api/users';
+import { useLoading } from '@/components/Loading';
+import { useToast } from '@/components/Toast';
 import { useField, useForm } from 'vee-validate'
+import { setToken } from "@/utils/token.ts"
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema: {
         name(value: string) {
             if (value?.length >= 2) return true
-
             return '名字至少两个字母';
         },
         password(value: string) {
             if (value?.length > 5) return true;
-
             return "密码长度至少6位"
         }
-    },
-})
+    }
+});
 const name = useField<string>('name')
 const password = useField<string>("password");
 
 const submit = handleSubmit(values => {
-    alert(JSON.stringify(values, null, 2))
+    const remove = useLoading()
+    userLogin("", { account: values.account, password: values.password })
+        .then(res => {
+            remove();
+            if (res.code !== 0) return Promise.reject({ message: res.msg });
+            setToken(res.data!.token)
+        })
+        .catch(err => {
+            remove();
+            useToast(err.message, "error");
+            buiredPoint("", err);
+        })
 })
 </script>
 

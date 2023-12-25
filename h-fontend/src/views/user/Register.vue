@@ -1,11 +1,11 @@
 <template>
     <div class="user-loginOrRegis__background">
         <h2>注册</h2>
-        <form @submit="false">
+        <form @submit.prevent="submit">
             <v-text-field variant="outlined" clearable placeholder="请输入用户名" v-model="name.value.value" :counter="10"
                 :error-messages="name.errorMessage.value" label="Name" />
             <v-text-field variant="outlined" clearable placeholder="请输入账户" v-model="account.value.value" :counter="10"
-                :error-messages="name.errorMessage.value" label="Account" />
+                :error-messages="account.errorMessage.value" label="Account" />
             <v-text-field type="password" variant="outlined" clearable placeholder="请输入密码" v-model="password.value.value"
                 :counter="10" :error-messages="password.errorMessage.value" label="Password" />
             <v-text-field type="password" variant="outlined" clearable placeholder="请确认密码"
@@ -13,15 +13,20 @@
                 label="Confirm Password" />
             <v-checkbox v-model="checkbox.value.value" :error-messages="checkbox.errorMessage.value" value="1"
                 label="同意用户协议及隐式政策" type="checkbox" />
-            <v-btn class="me-4" type="submit" @click="onSubmit">register</v-btn>
+            <v-btn class="me-4" type="submit">register</v-btn>
             <v-btn @click="handleReset">clear</v-btn>
         </form>
     </div>
 </template>
 <script setup lang="ts">
+import { userRegistry } from '@/api/users';
+import { buiredPoint } from "@/api/report.ts"
+import { useLoading } from "@/components/Loading/index.ts"
+import { useToast } from '@/components/Toast';
 import { useField, useForm } from 'vee-validate'
+import { useRouter } from 'vue-router';
 
-const { handleReset } = useForm({
+const { handleReset, handleSubmit } = useForm({
     validationSchema: {
         name(value: string) {
             if (value?.length >= 2) return true
@@ -37,7 +42,7 @@ const { handleReset } = useForm({
         },
         password(value: string) {
             if (value?.length > 5) return true;
-            return "密码长度至少6位"
+            return "密码长度至少六位"
         },
         confirmPassword(value: string) {
             if (password.value.value === value) return true;
@@ -50,16 +55,22 @@ const account = useField<string>('account')
 const password = useField<string>("password");
 const confirmPassword = useField<string>("confirmPassword");
 const checkbox = useField<string>('checkbox')
+const router = useRouter();
 
-const onSubmit = async () => {
-    let valid = true;
-    ({ valid } = await name.validate());
-    if (!valid)
-        ({ valid } = await password.validate());
-    ({ valid } = await confirmPassword.validate());
-    ({ valid } = await account.validate());
-    ({ valid } = await checkbox.validate());
-}
+const submit = handleSubmit(values => {
+    const remove = useLoading()
+    userRegistry("", { username: values.username, account: values.account, password: values.password })
+        .then(res => {
+            remove();
+            if (res.code !== 0) return Promise.reject({ message: res.msg });
+            router.replace("/login");
+        })
+        .catch(err => {
+            remove();
+            useToast(err.message, "error");
+            buiredPoint("", err)
+        });
+})
 </script>
 
 <style scoped lang="scss">
