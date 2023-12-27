@@ -16,6 +16,6 @@ export class Articles extends Basic {
     collection: number;
     @Column("string")
     coverImg: string;
-    @OneToMany(() => ArticlesComments, articleComments => articleComments.article)
-    articleComments: string
+    @OneToMany(() => ArticlesComments, articleComment => articleComment.article)
+    articleComments: ArticlesComments[]
 }

@@ -22,7 +22,7 @@
 import { userRegistry } from '@/api/users';
 import { buiredPoint } from "@/api/report.ts"
 import { useLoading } from "@/components/Loading/index.ts"
-import { useToast } from '@/components/Toast';
+import { useToast } from '@/components/Toast/index.ts';
 import { useField, useForm } from 'vee-validate'
 import { useRouter } from 'vue-router';
 

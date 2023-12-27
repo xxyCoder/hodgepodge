@@ -5,7 +5,7 @@ import { Articles } from "./articles.entity";
 export class ArticlesComments {
     @PrimaryGeneratedColumn()
     id: number;
-    @ManyToOne(() => Articles, article => article.articleComments)
+    @ManyToOne(() => Articles, articles => articles.articleComments)
     article: Articles
     @Column("string")
     comment: string;

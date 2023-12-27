@@ -14,8 +14,8 @@
 <script setup lang="ts">
 import { buiredPoint } from '@/api/report';
 import { userLogin } from '@/api/users';
-import { useLoading } from '@/components/Loading';
-import { useToast } from '@/components/Toast';
+import { useLoading } from '@/components/Loading/index.ts';
+import { useToast } from '@/components/Toast/index.ts';
 import { useField, useForm } from 'vee-validate'
 import { setToken } from "@/utils/token.ts"
 
