@@ -25,6 +25,7 @@ import { useLoading } from "@/components/Loading/index.ts"
 import { useToast } from '@/components/Toast/index.ts';
 import { useField, useForm } from 'vee-validate'
 import { useRouter } from 'vue-router';
+import { cryptoPassword } from '@/utils/crypto';
 
 const { handleReset, handleSubmit } = useForm({
     validationSchema: {
@@ -59,15 +60,16 @@ const router = useRouter();
 
 const submit = handleSubmit(values => {
     const remove = useLoading()
+    values.password = cryptoPassword(values.password);
     userRegistry("", { username: values.username, account: values.account, password: values.password })
         .then(res => {
-            remove();
             if (res.code !== 0) return Promise.reject({ message: res.msg });
+            remove();
             router.replace("/login");
         })
         .catch(err => {
             remove();
-            useToast(err.message, "error");
+            useToast(err.message ?? '网络错误', "error");
             buiredPoint("", err)
         });
 })

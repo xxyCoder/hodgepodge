@@ -13,6 +13,7 @@
     "@mdi/font": "^7.3.67",
     "@mdi/js": "^7.3.67",
     "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
     "lodash": "^4.17.21",
     "vee-validate": "^4.11.8",
     "vue": "^3.3.7",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/crypto-js": "^4.2.1",
     "@types/lodash": "^4.14.200",
     "@types/node": "^20.8.10",
     "@vitejs/plugin-vue": "^4.2.3",

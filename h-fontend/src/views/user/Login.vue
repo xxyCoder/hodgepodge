@@ -7,6 +7,7 @@
             <v-text-field type="password" variant="outlined" clearable placeholder="请输入密码" v-model="password.value.value"
                 :counter="10" :error-messages="password.errorMessage.value" label="Password"></v-text-field>
             <v-btn class="me-4" type="submit">login</v-btn>
+            <v-btn class="me-4" @click="gotoRegister">register</v-btn>
             <v-btn @click="handleReset">clear</v-btn>
         </form>
     </div>
@@ -18,6 +19,10 @@ import { useLoading } from '@/components/Loading/index.ts';
 import { useToast } from '@/components/Toast/index.ts';
 import { useField, useForm } from 'vee-validate'
 import { setToken } from "@/utils/token.ts"
+import { useRouter } from 'vue-router';
+import { cryptoPassword } from '@/utils/crypto';
+
+const router = useRouter()
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema: {
@@ -36,6 +41,7 @@ const password = useField<string>("password");
 
 const submit = handleSubmit(values => {
     const remove = useLoading()
+    values.password = cryptoPassword(values.password);
     userLogin("", { account: values.account, password: values.password })
         .then(res => {
             remove();
@@ -47,7 +53,10 @@ const submit = handleSubmit(values => {
             useToast(err.message, "error");
             buiredPoint("", err);
         })
-})
+});
+const gotoRegister = () => {
+    router.replace("/register")
+}
 </script>
 
 <style scoped lang="scss">
