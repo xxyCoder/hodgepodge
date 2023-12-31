@@ -6,3 +6,8 @@ export const serviceError = {
 export const successObj = {
     code: 0
 }
+
+export const userIsNotExistsOrPassErr = {
+    code: 400,
+    msg: "用户不存在或密码不正确"
+}
