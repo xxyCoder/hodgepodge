@@ -3,14 +3,25 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100vw;
     min-height: 100vh;
-    background: url("@/assets/sky.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    
+
     form {
-        display: inline-block;
+        padding: 30px;
+        border-radius: .625rem;
+        border: 1px solid #ccc;
+        display: block;
         margin-top: 20px;
+        box-shadow: 10px 10px 30px #ccc, -10px -10px 30px #fff;
+
+        a {
+            display: block;
+            color: blue;
+            margin-bottom: .625rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
 }

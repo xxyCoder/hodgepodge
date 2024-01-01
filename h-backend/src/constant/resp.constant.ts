@@ -4,10 +4,15 @@ export const serviceError = {
 }
 
 export const successObj = {
-    code: 0
+    code: 200,
 }
 
 export const userIsNotExistsOrPassErr = {
     code: 400,
     msg: "用户不存在或密码不正确"
+}
+
+export const importArgsIsNull = {
+    code: 400,
+    msg: "重要参数为空"
 }

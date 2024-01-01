@@ -1,4 +1,5 @@
 <template>
+    <Nav></Nav>
     <div class="main">
         <History :type="TEXT" :histories="articleHistories" title="文章浏览记录"></History>
         <History :type="VIDEO" title="视频浏览记录"></History>
@@ -15,6 +16,7 @@
 import { onBeforeMount, ref } from 'vue';
 import History from '@/components/History.vue';
 import Recommend from '@/components/Recommend.vue';
+import Nav from '@/components/Nav.vue';
 import type { IHistory, IRecommend } from '@/types/index.ts';
 import { TEXT, VIDEO, FORUM } from '@/types/constant.ts'
 
@@ -25,35 +27,8 @@ const articleHistories = ref<IHistory[]>([]);
 const articleRecommends = ref<IRecommend[]>();
 
 onBeforeMount(async () => {
-    articleHistories.value = [
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" },
-        { id: "1", titleOrName: "vue+ts+vite项目实战", summaryOrSrc: "本文介绍了如何使用vite和ts，搭建一个vue项目" }
-    ];
-    articleRecommends.value = [
-        {
-            id: "1",
-            title: "history.sendBeancon用法",
-            addr: ""
-        },
-        {
-            id: "2",
-            title: "实现单页应用",
-            addr: ""
-        },
-        {
-            id: "3",
-            title: "数组新增方法",
-            addr: ""
-        }
-    ]
+    articleHistories.value = [];
+    articleRecommends.value = [];
 })
 
 </script>

@@ -1,8 +1,10 @@
 import axios from "axios";
 
-export interface apiResponse<T = Record<string, string>> {
+type IStringObj = Record<string, string>
+
+export interface apiResponse<T = IStringObj> {
     code: number;
-    msg: string;
+    msg?: string;
     data?: T;
 }
 
@@ -25,16 +27,16 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(resp => {
-    return JSON.parse(resp.data);
+    return resp.data;
 }, error => {
     console.error("响应出错: ", error);
     return Promise.resolve(error);
 })
 
 export default {
-    post<T = Record<string, string>>(url: string) {
-        return (query: string, data: any) => {
-            return instance.post<T, apiResponse<T>>(url + query, JSON.stringify(data));
+    post<D = any, T = IStringObj>(url: string) {
+        return (query: string, data: T) => {
+            return instance.post<T, apiResponse<D>>(url + query, JSON.stringify(data));
         }
     }
 }

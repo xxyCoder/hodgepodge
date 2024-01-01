@@ -1,3 +1,68 @@
+<script lang="ts" setup>
+import { getUsername } from '@/utils/user';
+import { ref, onMounted, onUnmounted, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+
+const message = ref(1);
+const showList = ref(false);
+const isDragging = ref(false);
+const isClose = ref(true);
+const dragStartX = ref(0);
+const dragStartY = ref(0);
+const position = reactive({ x: 50, y: 50 });
+const router = useRouter();
+const username = getUsername()
+
+const listenerShow = () => {
+    showList.value = false;
+};
+const listenerUp = () => {
+    isDragging.value = false;
+};
+
+const changeShowToTrue = (e: MouseEvent) => {
+    e.stopPropagation();
+    showList.value = true;
+};
+
+const stopPropagation = (e: MouseEvent) => {
+    e.stopPropagation();
+}
+
+onMounted(() => {
+    document.addEventListener("click", listenerShow);
+});
+onUnmounted(() => {
+    document.removeEventListener("click", listenerShow);
+})
+
+const handleMouseDonw = (e: MouseEvent) => {
+    isDragging.value = true;
+    dragStartX.value = e.clientX;
+    dragStartY.value = e.clientY;
+}
+const handleMouseMove = (e: MouseEvent) => {
+    if (isDragging.value) {
+        position.x -= dragStartX.value - e.clientX;
+        position.y -= dragStartY.value - e.clientY;
+        dragStartX.value = e.clientX;
+        dragStartY.value = e.clientY;
+    }
+}
+const handleClick = () => {
+    router.push({ path: "/" });
+}
+
+const handleClose = () => {
+    isClose.value = !isClose.value;
+}
+
+const gotoLogin = (e: MouseEvent) => {
+    e.preventDefault();
+    router.push("/login");
+}
+</script>
+
 <template>
     <nav>
         <div class="nav-left__search">
@@ -16,9 +81,8 @@
             </div>
         </div>
         <div class="nav-right__info">
-            <v-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
-            </v-avatar>
+            <v-btn rounded v-if="username" size="small">{{ username[0] }}</v-btn>
+            <a @click="gotoLogin" v-else>登录</a>
             <v-btn @click="handleClose" class="chat" icon="mdi-chat" size="small"></v-btn>
             <v-btn @click="changeShowToTrue" v-if="!message" icon="mdi-bell" size="small"></v-btn>
             <v-btn @click="changeShowToTrue" v-else icon="mdi-bell-badge" size="small"></v-btn>
@@ -84,64 +148,6 @@
     </nav>
 </template>
 
-<script lang="ts" setup>
-import { ref, onMounted, onUnmounted, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-
-const message = ref(1);
-const showList = ref(false);
-const isDragging = ref(false);
-const isClose = ref(true);
-const dragStartX = ref(0);
-const dragStartY = ref(0);
-const position = reactive({ x: 50, y: 50 });
-const router = useRouter();
-
-const listenerShow = () => {
-    showList.value = false;
-};
-const listenerUp = () => {
-    isDragging.value = false;
-};
-
-const changeShowToTrue = (e: MouseEvent) => {
-    e.stopPropagation();
-    showList.value = true;
-};
-
-const stopPropagation = (e: MouseEvent) => {
-    e.stopPropagation();
-}
-
-onMounted(() => {
-    document.addEventListener("click", listenerShow);
-});
-onUnmounted(() => {
-    document.removeEventListener("click", listenerShow);
-})
-
-const handleMouseDonw = (e: MouseEvent) => {
-    isDragging.value = true;
-    dragStartX.value = e.clientX;
-    dragStartY.value = e.clientY;
-}
-const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging.value) {
-        position.x -= dragStartX.value - e.clientX;
-        position.y -= dragStartY.value - e.clientY;
-        dragStartX.value = e.clientX;
-        dragStartY.value = e.clientY;
-    }
-}
-const handleClick = () => {
-    router.push({ path: "/" });
-}
-
-const handleClose = () => {
-    isClose.value = !isClose.value;
-}
-</script>
-
 <style lang="scss" scoped>
 nav {
     padding: .3125rem;
@@ -189,6 +195,8 @@ a {
 
 .nav-right__info {
     text-wrap: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .chat {

@@ -4,27 +4,38 @@ import userService from '@src/service/users.service';
 import { serviceError, successObj, userIsNotExistsOrPassErr } from '@src/constant/resp.constant';
 import env from "@src/config/default.config"
 
-const { create, precisionFind, update, remove, find } = userService;
+const { create, precisionFind, update, remove, find, verify } = userService;
 const { SECRET } = env;
 
 class UserController {
     registry(req: Request, resp: Response) {
         const { username, password, account } = req.body;
-        create({ username, password, account, id: null })
-            .then(() => {
-                resp.send(successObj)
+        precisionFind({ account })
+            .then(res => {
+                if (res && res.dataValues.id) {
+                    resp.send({ code: 400, msg: "用户存在，换一个account名" });
+                    return;
+                }
+                create({ username, password, account, id: null })
+                    .then(() => {
+                        resp.send(successObj)
+                    })
+                    .catch(err => {
+                        console.error(`注册失败：${err}`);
+                        resp.send(serviceError)
+                    });
             })
             .catch(err => {
                 console.error(`注册失败：${err}`);
                 resp.send(serviceError)
-            });
+            })
     }
     login(req: Request, resp: Response) {
-        const { password, id } = req.body;
-        precisionFind({ id, password })
-            .then(res => {
-                if (res && res.dataValues.id == id) {
-                    resp.send({ code: 0, msg: "登录成功", token: jwt.sign({ id: res.dataValues.id }, SECRET!, { expiresIn: '3d' }) });
+        const { password, account } = req.body;
+        verify({ account, password })
+            .then(({ sc, id, username }) => {
+                if (sc) {
+                    resp.send({ code: 200, msg: "登录成功", data: { token: jwt.sign({ id }, SECRET!, { expiresIn: '3d' }), username } });
                 } else {
                     resp.send(userIsNotExistsOrPassErr);
                 }
@@ -36,13 +47,13 @@ class UserController {
     }
     modify(req: Request, resp: Response) {
         const { id, username, newPassword, password } = req.body;
-        precisionFind({ id, password })
-            .then(res => {
-                if (!res || res.dataValues.id != id) {
+        verify({ id, password })
+            .then(({ sc }) => {
+                if (!sc) {
                     resp.send(userIsNotExistsOrPassErr);
                     return;
                 }
-                update({ username, password, id, newPassword })
+                update({ username, id, newPassword })
                     .then(([affectedCount]) => {
                         if (affectedCount == 1) {
                             resp.send({ code: 0, msg: "修改成功" });
@@ -56,19 +67,30 @@ class UserController {
                     })
             })
             .catch(err => {
-                console.log(`查找失败：${err}`);
+                console.error(`修改失败：${err}`);
                 resp.send(serviceError);
             })
     }
     logout(req: Request, resp: Response) {
         const { id, password } = req.body;
-        remove({ id, password })
-            .then(deleteRows => {
-                if (deleteRows == 1) {
-                    resp.send({ code: 0, msg: "注销成功" });
-                } else {
+        verify({ id, password })
+            .then(({ sc }) => {
+                if (!sc) {
                     resp.send(userIsNotExistsOrPassErr);
+                    return;
                 }
+                remove({ id })
+                    .then(deleteRows => {
+                        if (deleteRows == 1) {
+                            resp.send({ code: 0, msg: "注销成功" });
+                        } else {
+                            resp.send(userIsNotExistsOrPassErr);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(`注销失败：${err}`);
+                        resp.send(serviceError);
+                    })
             })
             .catch(err => {
                 console.error(`注销失败：${err}`);
@@ -76,11 +98,11 @@ class UserController {
             })
     }
     search(req: Request, resp: Response) {
-        const { username, page_num, page_size } = req.query;
+        const { username = "", page_num, page_size } = req.query;
         find(Number(page_size), Number(page_num), username as string)
             .then(res => {
                 const users = res.map(r => r.dataValues);
-                resp.send({ code: 0, msg: "查询成功", users: JSON.stringify(users) });
+                resp.send({ code: 0, msg: "查询成功", data: JSON.stringify(users) });
             })
             .catch(err => {
                 console.error(`查询失败：${err}`);
@@ -88,3 +110,5 @@ class UserController {
             })
     }
 }
+
+export default new UserController()
